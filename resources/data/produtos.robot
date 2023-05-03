@@ -1,23 +1,34 @@
 *** Settings ***
 Resource  ../main.resource
 
+
 *** Keywords ***
+Criei uma sessão na API com token
+    ${headers}  Create Dictionary  
+    ...  accept=*/*  
+    ...  content-type=application/json  
+    ...  Authorization=${token}  
+    Create Session  
+    ...  alias=ServeRest
+    ...  url=${URL} 
+    ...  headers=${headers}
 Cadastrar produtos
+    ${nome_aleatoria}  Generate Random String  length=8  chars=[LETTERS]
+    ${nome_aleatoria}  Convert To Lower Case   ${nome_aleatoria}
+
     [Arguments]   ${status_code_produto}  
      &{bodyProduto}  Create Dictionary
-    ...      nome=Logitech MX Vertical
+    ...      nome=${nome_aleatoria}
     ...      preco=470
     ...      descricao=mouse
     ...      quantidade=381 
     Log    ${bodyProduto}
 
-    Criar Sessão na ServeRest
-
     ${respostaProduto}  POST On Session
     ...          alias=ServeRest
-    ...          url=Produtos
+    ...          url=produtos
     ...          json=${bodyProduto}
-    ...          expected_status=200 
+    ...          expected_status=201 
     Log       ${respostaProduto}
 
 Conferir Cadastro de produto

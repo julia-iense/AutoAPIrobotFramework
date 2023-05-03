@@ -4,7 +4,7 @@ Resource  ../main.resource
 *** Keywords ***
 Criar Sessão na ServeRest
     ${headers}  Create Dictionary  accept=application/json  Content-Type=application/json
-    Create Session    alias=ServeRest    url=https://serverest.dev   headers=${headers}
+    Create Session    alias=ServeRest    url=${url}   headers=${headers}
 
 Criar um usuário novo
     ${palavra_aleatoria}  Generate Random String  length=4  chars=[LETTERS]

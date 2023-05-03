@@ -19,10 +19,10 @@ Efetuar login
     Log    ${respostaLogin}
 
     IF  ${status_code_desejado_Login} == 200
-        Set Suite Variable   ${respostaLogin}  ${respostaLogin.json()}
+        Set Global Variable  ${token}  ${respostaLogin.json()}[authorization]
     END
-        Log    ${respostaLogin}
-  ${token}=  Set Variable    ${respostaLogin.json()} ["authorization"]
+    Set Global Variable  ${respostaLogin}  ${respostaLogin.json()}
+    Log    ${respostaLogin}
 Conferir login
     Log  ${respostaLogin}
     Dictionary Should Contain Item    ${respostaLogin}  message          Login realizado com sucesso

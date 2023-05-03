@@ -6,3 +6,6 @@ Library  Collections
 Resource  data/usuarios.robot
 Resource  data/login.robot
 Resource  data/produtos.robot
+
+*** Variables ***
+${url}=  https://serverest.dev 
